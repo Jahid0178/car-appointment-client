@@ -39,12 +39,13 @@ const LoginForm = () => {
   ): Promise<void> => {
     try {
       const response: Response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify(formData),
         }
       );
