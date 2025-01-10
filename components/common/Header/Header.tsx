@@ -4,7 +4,7 @@ import HeaderMobileMenu from "./HeaderMobileMenu";
 
 const Header = () => {
   return (
-    <header className="py-4 bg-white">
+    <header className="py-4 bg-gray-100">
       <div className="container">
         <nav className="flex justify-between items-center">
           <h3 className="text-3xl font-semibold">ADN</h3>

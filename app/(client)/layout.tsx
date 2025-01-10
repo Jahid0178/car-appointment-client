@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "@/components/common/Header/Header";
+import Footer from "@/components/common/Footer/Footer";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ const ClientLayout = ({ children }: ClientLayoutProps) => {
     <React.Fragment>
       <Header />
       <main>{children}</main>
-      <footer>Footer</footer>
+      <Footer />
     </React.Fragment>
   );
 };
