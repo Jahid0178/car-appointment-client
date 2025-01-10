@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "@/components/common/Header/Header";
 
 interface ClientLayoutProps {
   children: React.ReactNode;
@@ -7,7 +8,7 @@ interface ClientLayoutProps {
 const ClientLayout = ({ children }: ClientLayoutProps) => {
   return (
     <React.Fragment>
-      <header>Header</header>
+      <Header />
       <main>{children}</main>
       <footer>Footer</footer>
     </React.Fragment>

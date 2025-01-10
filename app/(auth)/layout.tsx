@@ -1,3 +1,4 @@
+import Header from "@/components/common/Header/Header";
 import React from "react";
 
 interface AuthLayoutProps {
@@ -5,7 +6,12 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
-  return <>{children}</>;
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
 };
 
 export default AuthLayout;

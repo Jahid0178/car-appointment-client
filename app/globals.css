@@ -10,4 +10,8 @@ body {
   :root {
     --radius: 0.5rem;
   }
+
+  section {
+    @apply py-4;
+  }
 }
