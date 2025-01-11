@@ -36,3 +36,23 @@ export type DashboardSidebarNavigationType = {
     icon: keyof typeof dynamicIconImports;
   }[];
 };
+
+export type AppointmentType = {
+  _id: string;
+  user: User;
+  serviceType: string;
+  appointmentDate: string;
+  status: string;
+  vehicleDetails: {
+    company: string;
+    model: string;
+    year: number;
+    licencePlate: string;
+    notes: string;
+  };
+  paymentDetails: {
+    status: string;
+    method: string;
+    amount: number;
+  };
+};
