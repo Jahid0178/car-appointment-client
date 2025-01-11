@@ -1,3 +1,5 @@
+import dynamicIconImports from "lucide-react/dynamicIconImports";
+
 export type User = {
   _id: string;
   name: string;
@@ -18,4 +20,19 @@ export type User = {
     manageServices: boolean;
   };
   appointments: [];
+};
+
+export type DashboardSidebarNavigationType = {
+  admin: {
+    id: number;
+    title: string;
+    path: string;
+    icon: keyof typeof dynamicIconImports;
+  }[];
+  user: {
+    id: number;
+    title: string;
+    path: string;
+    icon: keyof typeof dynamicIconImports;
+  }[];
 };

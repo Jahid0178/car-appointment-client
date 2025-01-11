@@ -19,8 +19,7 @@ async function isAuthenticated() {
       user: response.data,
       loggedIn: true,
     };
-  } catch (error) {
-    console.log("authenticated error", error);
+  } catch {
     return {
       user: null,
       loggedIn: false,
