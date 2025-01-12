@@ -78,6 +78,7 @@ const AppointmentTable = async ({ caption }: AppointmentTableProps) => {
             <TableHead className="border">Appointment Date</TableHead>
             <TableHead className="border">Status</TableHead>
             <TableHead className="border">User</TableHead>
+            <TableHead className="border">Payment Status</TableHead>
             <TableHead className="border">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -89,13 +90,16 @@ const AppointmentTable = async ({ caption }: AppointmentTableProps) => {
             >
               <TableCell className="border">{appointment._id}</TableCell>
               <TableCell className="border">
-                {appointment.serviceType}
+                {appointment.service.name}
               </TableCell>
               <TableCell className="border">
                 {new Date(appointment.appointmentDate).toLocaleDateString()}
               </TableCell>
               <TableCell className="border">{appointment.status}</TableCell>
               <TableCell className="border">{appointment.user.name}</TableCell>
+              <TableCell className="border">
+                {appointment.payment.status}
+              </TableCell>
               <TableCell className="border">
                 <div className="flex gap-2">
                   <Button

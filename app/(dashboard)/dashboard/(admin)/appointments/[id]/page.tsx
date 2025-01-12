@@ -41,14 +41,8 @@ const ViewAppointmentPage = async ({ params }: ViewAppointmentPageProps) => {
     return <div>Appointment not found</div>;
   }
 
-  const {
-    serviceType,
-    appointmentDate,
-    vehicleDetails,
-    status,
-    paymentDetails,
-    user,
-  } = data;
+  const { service, appointmentDate, vehicleDetails, status, payment, user } =
+    data;
 
   return (
     <section>
@@ -68,7 +62,7 @@ const ViewAppointmentPage = async ({ params }: ViewAppointmentPageProps) => {
           <CardContent className="space-y-4">
             <div className="flex flex-col md:flex-row justify-between items-center gap-2">
               <h2 className="text-lg font-semibold">
-                Service Type: {serviceType}
+                Service Type: {service.name}
               </h2>
               <p className="font-semibold">
                 Appointment Date:{" "}
@@ -91,9 +85,9 @@ const ViewAppointmentPage = async ({ params }: ViewAppointmentPageProps) => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Price Information</h3>
               <ul>
-                <li>Status: {paymentDetails.status}</li>
-                <li>Amount: {paymentDetails.amount || 0}</li>
-                <li>Method: {paymentDetails.method}</li>
+                <li>Status: {payment.status}</li>
+                <li>Amount: {payment.amount || 0}</li>
+                <li>Method: {payment.method}</li>
               </ul>
             </div>
             <div>

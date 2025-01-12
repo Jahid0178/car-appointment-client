@@ -50,7 +50,7 @@ export type DashboardSidebarNavigationType = {
 export type AppointmentType = {
   _id: string;
   user: User;
-  serviceType: string;
+  service: ServiceType;
   appointmentDate: string;
   status: string;
   vehicleDetails: {
@@ -60,9 +60,15 @@ export type AppointmentType = {
     licencePlate: string;
     notes: string;
   };
-  paymentDetails: {
-    status: string;
-    method: string;
-    amount: number;
-  };
+  payment: PaymentType;
+};
+
+export type PaymentType = {
+  _id: string;
+  user: User;
+  appointment: AppointmentType;
+  amount: number;
+  paymentDate: string;
+  status: string;
+  method: string;
 };
