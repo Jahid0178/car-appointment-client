@@ -16,6 +16,12 @@ export const dashboardSidebarNavigations: DashboardSidebarNavigationType = {
     },
     {
       id: 3,
+      title: "Services",
+      path: "/dashboard/services",
+      icon: "cog",
+    },
+    {
+      id: 4,
       title: "Appointments",
       path: "/dashboard/appointments",
       icon: "notepad-text",

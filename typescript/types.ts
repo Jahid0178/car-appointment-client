@@ -22,6 +22,16 @@ export type User = {
   appointments: [];
 };
 
+export type ServiceType = {
+  _id?: string;
+  name: string;
+  description: string;
+  price: number;
+  duration: number;
+  isActive?: boolean;
+  createdBy?: User;
+};
+
 export type DashboardSidebarNavigationType = {
   admin: {
     id: number;
