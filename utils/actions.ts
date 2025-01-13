@@ -85,3 +85,53 @@ export const deleteService = async (id: string) => {
     console.log("service delete action error", error);
   }
 };
+
+export const getAppointmentById = async (id: string) => {
+  try {
+    const response: Response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/appointments/${id}`,
+      {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+
+    if (!response.ok) throw new Error("Failed to get appointment by id");
+
+    return await response.json();
+  } catch (error) {
+    console.log("get appointment by id action error", error);
+  }
+};
+
+export const updateAppointmentByUserId = async (
+  userId: string,
+  appointmentId: string,
+  data: {
+    appointmentStatus: string;
+    paymentStatus: string;
+    paymentMethod: string;
+  }
+) => {
+  try {
+    const cookieStore = await cookies();
+    const response: Response = await fetch(
+      `
+      ${process.env.NEXT_PUBLIC_BACKEND_URL}/api/appointments/${userId}/${appointmentId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
+        body: JSON.stringify(data),
+      }
+    );
+
+    if (!response.ok) throw new Error("Failed to update appointment");
+
+    return await response.json();
+  } catch (error) {
+    console.log("appointment update action error", error);
+  }
+};
