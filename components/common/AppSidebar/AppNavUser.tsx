@@ -2,10 +2,24 @@
 
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const AppNavUser = () => {
-  const handleLogout = () => {
-    alert("Logout Successfully!");
+  const router = useRouter();
+  const handleLogout = async () => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/logout`,
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    router.push("/login");
   };
   return (
     <Button
