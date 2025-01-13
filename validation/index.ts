@@ -20,4 +20,18 @@ const loginFormSchema = z.object({
   password: z.string().trim(),
 });
 
-export { registerFormSchema, loginFormSchema };
+const userFormSchema = z.object({
+  name: z.string().trim(),
+  email: z.string().email().trim(),
+  phone: z.string().trim(),
+  gender: z.string().trim(),
+  role: z.string().trim(),
+  address: z.object({
+    street: z.string().trim(),
+    city: z.string().trim(),
+    state: z.string().trim(),
+    zipCode: z.string().trim(),
+  }),
+});
+
+export { registerFormSchema, loginFormSchema, userFormSchema };
