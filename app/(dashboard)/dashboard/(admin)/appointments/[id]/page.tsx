@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AppointmentType } from "@/typescript/types";
+import { cookies } from "next/headers";
 
 interface ViewAppointmentPageProps {
   params: Promise<{ id: string }>;
@@ -13,12 +14,16 @@ async function getAppointmentById(
   id: string
 ): Promise<AppointmentType | undefined> {
   try {
+    const cookieStore = await cookies();
     const response = await axios.get(
       `
       ${process.env.NEXT_PUBLIC_BACKEND_URL}/api/appointments/${id}`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
       }
     );
 

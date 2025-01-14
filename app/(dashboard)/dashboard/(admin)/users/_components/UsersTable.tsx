@@ -28,18 +28,29 @@ const UsersTable = ({ users }: UsersTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {users.map((user: User) => (
-          <TableRow key={user._id}>
-            <TableCell className="border">{user.name}</TableCell>
-            <TableCell className="border">{user.email}</TableCell>
-            <TableCell className="border">{user.phone}</TableCell>
-            <TableCell className="border">{user.gender}</TableCell>
-            <TableCell className="border">{user.role}</TableCell>
-            <TableCell className="flex gap-4">
-              <UsersTableAction id={user._id} />
+        {users && users.length > 0 ? (
+          users.map((user: User) => (
+            <TableRow key={user._id}>
+              <TableCell className="border">{user.name}</TableCell>
+              <TableCell className="border">{user.email}</TableCell>
+              <TableCell className="border">{user.phone}</TableCell>
+              <TableCell className="border">{user.gender}</TableCell>
+              <TableCell className="border">{user.role}</TableCell>
+              <TableCell className="flex gap-4">
+                <UsersTableAction id={user._id} />
+              </TableCell>
+            </TableRow>
+          ))
+        ) : (
+          <TableRow>
+            <TableCell
+              colSpan={7}
+              className="text-center"
+            >
+              No users found.
             </TableCell>
           </TableRow>
-        ))}
+        )}
       </TableBody>
     </Table>
   );

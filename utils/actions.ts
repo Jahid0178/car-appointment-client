@@ -88,11 +88,15 @@ export const deleteService = async (id: string) => {
 
 export const getAppointmentById = async (id: string) => {
   try {
+    const cookieStore = await cookies();
     const response: Response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/appointments/${id}`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
       }
     );
 

@@ -48,9 +48,6 @@ async function getAllServices() {
 const ServicesTable = async ({ caption }: ServicesTableProps) => {
   const services = await getAllServices();
 
-  if (!services || services.length === 0)
-    return <div className="border p-4">No services found</div>;
-
   return (
     <div className="border p-4">
       <div className="flex justify-end mb-4">
@@ -72,28 +69,40 @@ const ServicesTable = async ({ caption }: ServicesTableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {services.map((service: ServiceType) => {
-            const { _id, name, price, duration, isActive, createdBy } = service;
-            return (
-              <TableRow key={_id}>
-                <TableCell>{_id}</TableCell>
-                <TableCell>{name}</TableCell>
-                <TableCell>{price} BHD</TableCell>
-                <TableCell>{duration} minutes</TableCell>
-                <TableCell>
-                  <Badge
-                    className={`${isActive ? "bg-green-600" : "bg-red-600"}`}
-                  >
-                    {isActive ? "Active" : "Inactive"}
-                  </Badge>
-                </TableCell>
-                <TableCell>{createdBy?.name}</TableCell>
-                <TableCell className="flex gap-4">
-                  <ServicesTableAction _id={_id!} />
-                </TableCell>
-              </TableRow>
-            );
-          })}
+          {services && services.length > 0 ? (
+            services.map((service: ServiceType) => {
+              const { _id, name, price, duration, isActive, createdBy } =
+                service;
+              return (
+                <TableRow key={_id}>
+                  <TableCell>{_id}</TableCell>
+                  <TableCell>{name}</TableCell>
+                  <TableCell>{price} BHD</TableCell>
+                  <TableCell>{duration} minutes</TableCell>
+                  <TableCell>
+                    <Badge
+                      className={`${isActive ? "bg-green-600" : "bg-red-600"}`}
+                    >
+                      {isActive ? "Active" : "Inactive"}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{createdBy?.name}</TableCell>
+                  <TableCell className="flex gap-4">
+                    <ServicesTableAction _id={_id!} />
+                  </TableCell>
+                </TableRow>
+              );
+            })
+          ) : (
+            <TableRow>
+              <TableCell
+                colSpan={7}
+                className="text-center"
+              >
+                No services found.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </div>

@@ -85,7 +85,7 @@ const AppointmentForm = ({ data }: AppointmentFormProps) => {
                     </FormControl>
                     <SelectContent>
                       <SelectItem value="Pending">Pending</SelectItem>
-                      <SelectItem value="Working">Working</SelectItem>
+                      <SelectItem value="Confirmed">Confirmed</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>
                       <SelectItem value="Cancelled">Cancelled</SelectItem>
                     </SelectContent>

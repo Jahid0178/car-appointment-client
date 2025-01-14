@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { AppointmentType } from "@/typescript/types";
+import { cookies } from "next/headers";
 
 interface AppointmentTableProps {
   caption: string;
@@ -18,11 +19,15 @@ interface AppointmentTableProps {
 
 async function getAppointments() {
   try {
+    const cookieStore = await cookies();
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/appointments`,
       {
         method: "GET",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: cookieStore.toString(),
+        },
       }
     );
 
@@ -50,21 +55,11 @@ const ErrorAlert = ({ message }: { message: string }) => (
   </div>
 );
 
-const EmptyAlert = () => (
-  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 my-4">
-    <div className="text-gray-700">No appointments found.</div>
-  </div>
-);
-
 const AppointmentTable = async ({ caption }: AppointmentTableProps) => {
   const { data, error } = await getAppointments();
 
   if (error) {
     return <ErrorAlert message={error} />;
-  }
-
-  if (!data || data.length === 0) {
-    return <EmptyAlert />;
   }
 
   return (
@@ -83,47 +78,60 @@ const AppointmentTable = async ({ caption }: AppointmentTableProps) => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((appointment: AppointmentType) => (
-            <TableRow
-              key={appointment._id}
-              className="even:bg-slate-100 hover:bg-slate-100"
-            >
-              <TableCell className="border">{appointment._id}</TableCell>
-              <TableCell className="border">
-                {appointment.service.name}
-              </TableCell>
-              <TableCell className="border">
-                {new Date(appointment.appointmentDate).toLocaleDateString()}
-              </TableCell>
-              <TableCell className="border">{appointment.status}</TableCell>
-              <TableCell className="border">{appointment.user.name}</TableCell>
-              <TableCell className="border">
-                {appointment.payment.status}
-              </TableCell>
-              <TableCell className="border">
-                <div className="flex gap-2">
-                  <Button
-                    asChild
-                    variant="link"
-                  >
-                    <Link href={`/dashboard/appointments/${appointment._id}`}>
-                      View
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="link"
-                  >
-                    <Link
-                      href={`/dashboard/appointments/edit/${appointment._id}`}
+          {data && data.length > 0 ? (
+            data.map((appointment: AppointmentType) => (
+              <TableRow
+                key={appointment._id}
+                className="even:bg-slate-100 hover:bg-slate-100"
+              >
+                <TableCell className="border">{appointment._id}</TableCell>
+                <TableCell className="border">
+                  {appointment.service.name}
+                </TableCell>
+                <TableCell className="border">
+                  {new Date(appointment.appointmentDate).toLocaleDateString()}
+                </TableCell>
+                <TableCell className="border">{appointment.status}</TableCell>
+                <TableCell className="border">
+                  {appointment.user.name}
+                </TableCell>
+                <TableCell className="border">
+                  {appointment.payment.status}
+                </TableCell>
+                <TableCell className="border">
+                  <div className="flex gap-2">
+                    <Button
+                      asChild
+                      variant="link"
                     >
-                      Edit
-                    </Link>
-                  </Button>
-                </div>
+                      <Link href={`/dashboard/appointments/${appointment._id}`}>
+                        View
+                      </Link>
+                    </Button>
+                    <Button
+                      asChild
+                      variant="link"
+                    >
+                      <Link
+                        href={`/dashboard/appointments/edit/${appointment._id}`}
+                      >
+                        Edit
+                      </Link>
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell
+                colSpan={7}
+                className="text-center"
+              >
+                No appointments found.
               </TableCell>
             </TableRow>
-          ))}
+          )}
         </TableBody>
       </Table>
     </div>
