@@ -34,4 +34,21 @@ const userFormSchema = z.object({
   }),
 });
 
-export { registerFormSchema, loginFormSchema, userFormSchema };
+const bookingFormSchema = z.object({
+  service: z.string().trim(),
+  appointmentDate: z.string().trim(),
+  vehicleDetails: z.object({
+    company: z.string().trim(),
+    model: z.string().trim(),
+    year: z.string().trim(),
+    licencePlate: z.string().trim(),
+    notes: z.string().trim(),
+  }),
+});
+
+export {
+  registerFormSchema,
+  loginFormSchema,
+  userFormSchema,
+  bookingFormSchema,
+};
